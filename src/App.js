@@ -1,30 +1,37 @@
 import React from 'react';
-import './App.css';
-import Header from './Header';
-import Footer from './Footer';
-import Main from './Main';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Animation from './components/Animation';
+import Footer from './components/Footer';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+`;
+
+const defaultTheme = {
+  darkColor: '#071e3d',
+  lightColor: '#21e6c1',
+  primaryColor: '#1f4287',
+};
 
 function App() {
-  const [state, setState] = React.useState(false);
-
-  // const h2Style = {
-  //   backgroundColor: 'blue',
-  //   color: state ? 'yellow' : 'green',
-  // };
-
-  let headerStyle = 'main-header';
-  if (state) {
-    headerStyle += ' color-green';
-  }
   return (
-    <div>
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
+
       <Header />
-      {/* <h1 style={h2Style}>Hello World</h1> */}
-      <h1 className={headerStyle}>Hello World</h1>
-      <button onClick={() => setState((prev) => !prev)}>Toggle State</button>
-      <Main />
+      <Hero />
+      <Animation />
       <Footer />
-    </div>
+    </ThemeProvider>
   );
 }
 
